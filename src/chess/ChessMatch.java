@@ -29,6 +29,7 @@ public class ChessMatch {
     }
     private void initialSetup(){
         this.placeNewPiece('e', 1, new King(board, Color.WHITE));
+        this.placeNewPiece('e', 8, new King(board, Color.BLACK));
     }
 
 }
