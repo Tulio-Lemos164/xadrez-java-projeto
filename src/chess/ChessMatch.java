@@ -3,6 +3,7 @@ package chess;
 import boardgame.Board;
 import boardgame.Position;
 import chess.chess.pieces.King;
+import chess.chess.pieces.Rook;
 
 public class ChessMatch {
 
@@ -22,8 +23,12 @@ public class ChessMatch {
         }
         return mat;
     }
+
+    private void placeNewPiece(char column, int row, ChessPiece piece){
+        board.placePiece(piece, new ChessPosition(column, row).toPosition());
+    }
     private void initialSetup(){
-        board.placePiece(new King(board, Color.WHITE), new Position(7, 4));
+        this.placeNewPiece('e', 1, new King(board, Color.WHITE));
     }
 
 }
