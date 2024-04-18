@@ -29,6 +29,7 @@ public class ChessMatch {
         Position source = sourcePosition.toPosition();
         Position target =targetPosition.toPosition();
         this.validateSourcePosition(source);
+        this.validateTargetPosition(source, target);
         Piece capturedPiece = makeMove(source, target);
         return (ChessPiece) capturedPiece;
     }
@@ -49,12 +50,20 @@ public class ChessMatch {
         }
     }
 
+    private void validateTargetPosition(Position source, Position target){
+        if (!board.piece(source).possibleMove(target)){
+            throw new ChessException("A peca escolhida nao pode ir para o local escolhido.");
+        }
+    }
+
     private void placeNewPiece(char column, int row, ChessPiece piece){
         board.placePiece(piece, new ChessPosition(column, row).toPosition());
     }
     private void initialSetup(){
         this.placeNewPiece('e', 1, new King(board, Color.WHITE));
         this.placeNewPiece('e', 8, new King(board, Color.BLACK));
+        this.placeNewPiece('a', 1, new Rook(board, Color.WHITE));
+        this.placeNewPiece('a', 8, new Rook(board, Color.BLACK));
     }
 
 }
