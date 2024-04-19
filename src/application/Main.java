@@ -5,6 +5,7 @@ import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -40,12 +41,26 @@ public class Main {
                 if (capturedPiece != null){
                     captured.add(capturedPiece);
                 }
+
+                if (chessMatch.getPromoted() != null){
+                    System.out.println("Digite a letra da peça (Q/B/N/R) que você deseja: ");
+                    String type = sc.nextLine().toUpperCase();
+                    while (!type.equals("Q") && !type.equals("B") && !type.equals("N") && !type.equals("R")){
+                        System.out.println("VALOR INVALIDO! Digite a letra da peça (Q/B/N/R) que você deseja: ");
+                        type = sc.nextLine().toUpperCase();
+                    }
+                    chessMatch.replacePromotedPiece(type);
+                }
             }
             catch (ChessException e){
                 System.out.println(e.getMessage());
                 sc.nextLine();
             }
             catch (InputMismatchException e){
+                System.out.println(e.getMessage());
+                sc.nextLine();
+            }
+            catch (InvalidParameterException e){
                 System.out.println(e.getMessage());
                 sc.nextLine();
             }
